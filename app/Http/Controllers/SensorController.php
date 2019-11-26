@@ -26,5 +26,23 @@ class SensorController extends Controller
         }
         return response()->json($data,$data['code']);
     }
+    public function showTemperatura(){
+        $sensor=sensor::where('nombre','temperatura')->get('minimo');
+
+        if(is_object($sensor)){
+            $data=[
+                'code'=>200,
+                'status'=>'success',
+                'tiempo'=>$sensor
+            ];
+        }else{
+            $data=[
+                'code'=>404,
+                'status'=>'error',
+                'message'=>'El dfsdgfdfgsdfassa'
+            ];
+        }
+        return response()->json($data,$data['code']);
+    }
     
 }

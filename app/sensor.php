@@ -11,6 +11,6 @@ class sensor extends Model
     
     protected $table='sensor';
     protected $fillable = [
-        'id','nombre','estado','caracteristica','invernadero_id_invernadero','tiempo'
+        'id','nombre','estado','caracteristica','invernadero_id_invernadero','tiempo','minimo','maximo'
     ];
 }
