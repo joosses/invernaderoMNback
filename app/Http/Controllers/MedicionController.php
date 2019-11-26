@@ -176,6 +176,39 @@ $data=[
     'message'=> 'No has enviado ninguna entrevista.'
 ];  
     }
+    public function ultimaTemperatura(){
+        $medicions=medicion::where('nombre','Temperatura')->get()->last();
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'medicion'=>$medicions
+        ],200);
+    }
+    
+    public function ultimaHumedad(){
+        $medicions=medicion::where('nombre','Humedad')->get()->last();
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'medicion'=>$medicions
+        ],200);
+    }
+    public function ultimaHumedadSuelo(){
+        $medicions=medicion::where('nombre','Humedad Suelo')->get()->last();
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'medicion'=>$medicions
+        ],200);
+    }
+    public function ultimaCo2(){
+        $medicions=medicion::where('nombre','Co2')->get()->last();
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'medicion'=>$medicions
+        ],200);
+    }
 
     public function ultimaTemperatura(){
         $medicions=medicion::where('nombre','Temperatura')->get()->last();
