@@ -36,6 +36,11 @@ Route::post('/medicion/hum','MedicionController@medicionHumedad');
 Route::post('/medicion/suel','MedicionController@medicionSuelo');
 Route::post('/medicion/co2','MedicionController@medicionCo2');
 
+Route::get('/medicionHumedad','MedicionController@ultimaHumedad');
+Route::get('/medicionTemperatura','MedicionController@ultimaTemperatura');
+Route::get('/medicionHumedadSuelo','MedicionController@ultimaHumedadSuelo');
+Route::get('/medicionCo2','MedicionController@ultimaCo2');
+
 Route::post('/medicion/crear2','MedicionController@prueba');
 Route::get('/', function () {
     return view('welcome');
