@@ -41,11 +41,8 @@ Route::get('/medicionTemperatura','MedicionController@ultimaTemperatura');
 Route::get('/medicionHumedadSuelo','MedicionController@ultimaHumedadSuelo');
 Route::get('/medicionCo2','MedicionController@ultimaCo2');
 
-<<<<<<< HEAD
 Route::get('/sensortemp','SensorController@showTemperatura');
 
-=======
->>>>>>> 55ec59d94b1e9a372b8abded1ac8a9ba0e93dfc9
 Route::post('/medicion/crear2','MedicionController@prueba');
 Route::get('/', function () {
     return view('welcome');

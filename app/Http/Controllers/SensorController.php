@@ -39,7 +39,7 @@ class SensorController extends Controller
             $data=[
                 'code'=>404,
                 'status'=>'error',
-                'message'=>'El dfsdgfdfgsdfassa'
+                'message'=>'no existe minimo'
             ];
         }
         return response()->json($data,$data['code']);
