@@ -26,23 +26,44 @@ class SensorController extends Controller
         }
         return response()->json($data,$data['code']);
     }
-    public function showTemperatura(){
-        $sensor=sensor::where('nombre','temperatura')->get('minimo');
+    public function showTemperaturaMin(){
+        $sensor=sensor::where('nombre','temperatura')->get()->last();
 
-        if(is_object($sensor)){
-            $data=[
-                'code'=>200,
-                'status'=>'success',
-                'tiempo'=>$sensor
-            ];
-        }else{
-            $data=[
-                'code'=>404,
-                'status'=>'error',
-                'message'=>'no existe minimo'
-            ];
-        }
-        return response()->json($data,$data['code']);
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'tiempo'=>$sensor
+        ],200);
     }
+    
+    public function showHumedadMin(){
+        $sensor=sensor::where('nombre','humedad')->get()->last();
+
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'tiempo'=>$sensor
+        ],200);
+    }
+    public function showHumedadSueloMin(){
+        $sensor=sensor::where('nombre','humedadsuelo')->get()->last();
+
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'tiempo'=>$sensor
+        ],200);
+    }
+    public function showCo2Min(){
+        $sensor=sensor::where('nombre','co2')->get()->last();
+
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'tiempo'=>$sensor
+        ],200);
+    }
+
+    
     
 }
