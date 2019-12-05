@@ -24,6 +24,8 @@ class VerifyCsrfToken extends Middleware
         'usuario*',
         'medicion*',
         'actuador*',
-        'invernadero*'
+        'invernadero*',
+        'sensor*'
+
     ];
 }
