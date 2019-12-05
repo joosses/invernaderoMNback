@@ -75,7 +75,7 @@ class MedicionController extends Controller
         $chipid = $request->input("chipid");
         $valor = $request->input("valor");
         
-        //en caso de no haber errores, guarda el estudiante en la base de datos
+        //en caso de no haber errores, guarda la medicion en la base de datos
         $medicion=new medicion();
         $medicion->valor= $valor;
         $tiempo = date('Y-m-d H:i:s');
@@ -91,7 +91,7 @@ class MedicionController extends Controller
         $chipid = $request->input("chipid");
         $valor = $request->input("valor");
         
-        //en caso de no haber errores, guarda el estudiante en la base de datos
+        //en caso de no haber errores, guarda la medicion en la base de datos
         $medicion=new medicion();
         $medicion->valor= $valor;
         $tiempo = date('Y-m-d H:i:s');
@@ -107,7 +107,7 @@ class MedicionController extends Controller
         $chipid = $request->input("chipid");
         $valor = $request->input("valor");
         
-        //en caso de no haber errores, guarda el estudiante en la base de datos
+        //en caso de no haber errores, guarda la medicion en la base de datos
         $medicion=new medicion();
         $medicion->valor= $valor;
         $tiempo = date('Y-m-d H:i:s');
@@ -123,7 +123,7 @@ class MedicionController extends Controller
         $chipid = $request->input("chipid");
         $valor = $request->input("valor");
         
-        //en caso de no haber errores, guarda el estudiante en la base de datos
+        //en caso de no haber errores, guarda la medicion en la base de datos
         $medicion=new medicion();
         $medicion->valor= $valor;
         $tiempo = date('Y-m-d H:i:s');

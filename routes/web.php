@@ -46,6 +46,12 @@ Route::get('/humedadmin','SensorController@showHumedadMin');
 Route::get('/humedadsuelomin','SensorController@showHumedadSueloMin');
 Route::get('/co2min','SensorController@showCo2Min');
 
+Route::get('/invernadero/{id}','InvernaderoController@show');
+Route::get('/invernadero','InvernaderoController@index');
+Route::put('/invernaderou/{id}','InvernaderoController@update');
+Route::post('/invernadero/inv','InvernaderoController@crear');
+Route::post('/invernadero/nuevo','InvernaderoController@nuevo');
+
 
 Route::post('/medicion/crear2','MedicionController@prueba');
 Route::get('/', function () {
