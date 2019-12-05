@@ -22,7 +22,7 @@ class InvernaderoController extends Controller
         $cultivo = $request->input("cultivo");
         $caracteristicas = $request->input("caracteristicas");
         $placa = $request->input("placa");
-        $usuario = $request->input("usuario_id_usuario");
+        $usuario_id_usuario = $request->input("usuario_id_usuario");
         
         //en caso de no haber errores, guarda la medicion en la base de datos
         $invernadero=new invernadero();
@@ -30,7 +30,7 @@ class InvernaderoController extends Controller
         
         $invernadero->caracteristicas= $caracteristicas;
         $invernadero->placa=$placa;
-        $invernadero->usuario_id_usuario=$usuario;
+        $invernadero->usuario_id_usuario=$usuario_id_usuario;
         $invernadero->save();
 
     }
@@ -43,7 +43,7 @@ class InvernaderoController extends Controller
         $params_array=json_decode($json,true);    //decodifica los datos en un array
 
         //limpiar datos (quita espacios en blanco)
-       // $params_array=array_map('trim',$params_array);
+        $params_array=array_map('trim',$params_array);
 
         //validar datos
         if(!empty($params_array)){
@@ -51,8 +51,9 @@ class InvernaderoController extends Controller
             $validate=\Validator::make($params_array,[
                 'cultivo'   =>'required',
                 'caracteristicas'   =>'required',
-                'placa'     =>'required',  
-                'usuario_id_usuario'  =>'required'
+                'placa'     =>'required'
+                
+                
             ]);
 
             if($validate->fails()){
@@ -74,7 +75,7 @@ class InvernaderoController extends Controller
               
                 
                 
-                //guardar el usuario
+                //guardar el invernadero
                 $invernadero->save();
 
                 $data=array(
