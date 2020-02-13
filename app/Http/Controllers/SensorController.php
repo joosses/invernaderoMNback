@@ -71,7 +71,7 @@ class SensorController extends Controller
         $params_array=json_decode($json,true);
 
         if(!empty($params_array)){
-            //Validar los datos
+            //Validar los datos s
             $validate=\Validator::make($params_array,[
                 'id' => 'required',
             ]);

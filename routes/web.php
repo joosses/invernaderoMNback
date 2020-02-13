@@ -21,9 +21,14 @@ Route::get('/user/image/{filename}','UserController@getImage');
 Route::put('/userDisable/{id}','UserController@disable');
 Route::delete('/user/{id}','UserController@destroy');
 
-Route::put('/actuador/{id}','ActuadorController@update');
+Route::put('/actuadoru/{id}','ActuadorController@update');
 Route::get('/actuador','ActuadorController@index');
 Route::get('/actuadorB/{id}','ActuadorController@show');
+Route::get('/actuadorluz','ActuadorController@showLuz');
+Route::get('/actuadoragua','ActuadorController@showAgua');
+Route::get('/actuadorextractor','ActuadorController@showExtractor');
+
+
 
 
 

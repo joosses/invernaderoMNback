@@ -18,7 +18,7 @@ class ActuadorController extends Controller
         if(!empty($params_array)){
             //Validar los datos
             $validate=\Validator::make($params_array,[
-                'estado' => 'required',
+                'id' => 'required',
             ]);
 
             //quitar los datos que no quiero actualizar
@@ -70,5 +70,32 @@ class ActuadorController extends Controller
             );
         }
         return response()->json($data, $data['code']);
+    }
+    public function showLuz(){
+        $actuador=actuador::where('nombre','luz')->get()->last();
+
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'tiempo'=>$actuador
+        ],200);
+    }
+    public function showAgua(){
+        $actuador=actuador::where('nombre','agua')->get()->last();
+
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'tiempo'=>$actuador
+        ],200);
+    }
+    public function showExtractor(){
+        $actuador=actuador::where('nombre','extractor')->get()->last();
+
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'tiempo'=>$actuador
+        ],200);
     }
 }
