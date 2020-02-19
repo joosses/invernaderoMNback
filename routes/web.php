@@ -16,12 +16,12 @@ use App\Http\Middleware\ApiAuthMiddleware;
 Route::get('/usuario','UsuarioController@index');
 Route::get('/usuario/{id}','UsuarioController@show');
 Route::post('/usuario/crear','UsuarioController@register');
-Route::post('/user/login','UsuarioController@login');
-Route::put('/user/update','UsuarioController@update');
-Route::post('/user/upload','UsuarioController@upload')->middleware(ApiAuthMiddleware::class);
-Route::get('/user/image/{filename}','UsuarioController@getImage');
+Route::post('/usuario/login','UsuarioController@login');
+Route::put('/usuario/update','UsuarioController@update');
+Route::post('/usuario/upload','UsuarioController@upload')->middleware(ApiAuthMiddleware::class);
+Route::get('/usuario/image/{filename}','UsuarioController@getImage');
 Route::put('/userDisable/{id}','UsuarioController@disable');
-Route::delete('/user/{id}','UsuarioController@destroy');
+Route::delete('/usuario/{id}','UsuarioController@destroy');
 
 
 Route::put('/actuadoru/{id}','ActuadorController@update');
