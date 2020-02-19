@@ -10,16 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//RUTAS PARA USUARIO
+//RUTAS PARA 
+use App\Http\Middleware\ApiAuthMiddleware;
+
 Route::get('/usuario','UsuarioController@index');
 Route::get('/usuario/{id}','UsuarioController@show');
 Route::post('/usuario/crear','UsuarioController@register');
-Route::post('/usuario/login','UserController@login');
-Route::put('/user/update','UserController@update');
-Route::post('/user/upload','UserController@upload')->middleware(ApiAuthMiddleware::class);
-Route::get('/user/image/{filename}','UserController@getImage');
-Route::put('/userDisable/{id}','UserController@disable');
-Route::delete('/user/{id}','UserController@destroy');
+Route::post('/user/login','UsuarioController@login');
+Route::put('/user/update','UsuarioController@update');
+Route::post('/user/upload','UsuarioController@upload')->middleware(ApiAuthMiddleware::class);
+Route::get('/user/image/{filename}','UsuarioController@getImage');
+Route::put('/userDisable/{id}','UsuarioController@disable');
+Route::delete('/user/{id}','UsuarioController@destroy');
+
 
 Route::put('/actuadoru/{id}','ActuadorController@update');
 Route::put('/actuadorreset/{id}','ActuadorController@resetTiempo');
