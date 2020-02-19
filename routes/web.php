@@ -11,7 +11,7 @@
 |
 */
 //RUTAS PARA 
-use App\Http\Middleware\ApiAuthMiddleware;
+//use App\Http\Middleware\ApiAuthMiddleware;
 
 Route::get('/usuario','UsuarioController@index');
 Route::get('/usuario/{id}','UsuarioController@show');

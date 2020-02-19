@@ -138,8 +138,8 @@ class UsuarioController extends Controller
 
         //validar los datos
         $validate = \Validator::make($params_array, [
-            'email'     => 'required|email',
-            'password'  => 'required'
+            'correo'     => 'required|email',
+            'contrasena'  => 'required'
         ]);
 
         if ($validate->fails()) {
@@ -151,13 +151,13 @@ class UsuarioController extends Controller
             );
         } else {
             //cifrar la password
-            $pwd = hash('sha256', $params->password);
+            $pwd = hash('sha256', $params->contrasena);
             //logea al usuario con la funcion signup en jwtAuth y recibe el token
-            $signup = $jwtAuth->signup($params->email, $pwd);
+            $signup = $jwtAuth->signup($params->correo, $pwd);
 
             if (!empty($params->gettoken)) {
                 //logea al usuario con la funcion signup en jwtAuth y recibe los datos decodificados
-                $signup = $jwtAuth->signup($params->email, $pwd, true);
+                $signup = $jwtAuth->signup($params->correo, $pwd, true);
             }
         }
 
