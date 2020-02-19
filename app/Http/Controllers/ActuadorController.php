@@ -98,4 +98,49 @@ class ActuadorController extends Controller
             'tiempo'=>$actuador
         ],200);
     }
+    public function resetTiempo($id,Request $request){
+
+
+        //Recoger datos por post
+       
+        $json=$request->input('json',null);
+       
+        
+        $params_array=json_decode($json,true);
+        //$auxiliar->estado=0;
+        
+
+        if(!empty($params_array)){
+            //Validar los datos
+            $validate=\Validator::make($params_array,[
+                'id' => 'required',
+            ]);
+
+            //quitar los datos que no quiero actualizar
+           
+            unset($params_array['id']);
+
+            //actualizar el registro de modelo
+            $params_array['estado']=0;
+            
+            $actuador=actuador::where('id',$id)->update($params_array);
+           
+            $data=[
+                'code'=>200,
+                'status'=>'success',
+                'actuador'=>$params_array
+            ];
+
+        }else{
+            $data=[
+                'code'=>400,
+                'status'=>'error',
+                'message'=> 'No has enviado ningun actuador aguaaaaa.'
+            ];
+        }
+        
+        return response()->json($data,$data['code']);
+    }
+
+    
 }

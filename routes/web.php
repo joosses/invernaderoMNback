@@ -14,7 +14,7 @@
 Route::get('/usuario','UsuarioController@index');
 Route::get('/usuario/{id}','UsuarioController@show');
 Route::post('/usuario/crear','UsuarioController@register');
-Route::post('/user/login','UserController@login');
+Route::post('/usuario/login','UserController@login');
 Route::put('/user/update','UserController@update');
 Route::post('/user/upload','UserController@upload')->middleware(ApiAuthMiddleware::class);
 Route::get('/user/image/{filename}','UserController@getImage');
@@ -22,6 +22,7 @@ Route::put('/userDisable/{id}','UserController@disable');
 Route::delete('/user/{id}','UserController@destroy');
 
 Route::put('/actuadoru/{id}','ActuadorController@update');
+Route::put('/actuadorreset/{id}','ActuadorController@resetTiempo');
 Route::get('/actuador','ActuadorController@index');
 Route::get('/actuadorB/{id}','ActuadorController@show');
 Route::get('/actuadorluz','ActuadorController@showLuz');
@@ -42,6 +43,7 @@ Route::post('/medicion/suel','MedicionController@medicionSuelo');
 Route::post('/medicion/co2','MedicionController@medicionCo2');
 
 Route::get('/medicionHumedad','MedicionController@ultimaHumedad');
+Route::get('/grafica','MedicionController@grafica');
 Route::get('/medicionTemperatura','MedicionController@ultimaTemperatura');
 Route::get('/medicionHumedadSuelo','MedicionController@ultimaHumedadSuelo');
 Route::get('/medicionCo2','MedicionController@ultimaCo2');

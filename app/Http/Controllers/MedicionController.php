@@ -20,6 +20,15 @@ class MedicionController extends Controller
             'medicion'=>$medicions
         ],200);
     }
+
+    public function grafica(){
+        $medicions=medicion::all();
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'medicion'=>$medicions
+        ],200);
+    }
 /*
     public function index(Request $request){
         
