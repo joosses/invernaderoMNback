@@ -73,7 +73,10 @@ class UsuarioController extends Controller
 
             $validate=\Validator::make($params_array,[
                 'nombre'      =>'required|alpha',
+                'apellido'    =>'required|alpha',
                 'telefono'   =>'required|numeric',
+                'direccion'      =>'required|alpha',
+                'ciudad'    =>'required|alpha',
                 'correo'     =>'required|email|unique:usuario',  //unique:users, verifica que sea unico en la tabla usuarios(no puede haber 2 usuarios con le mismo correo)
                 'contrasena'  =>'required'
             ]);
@@ -92,7 +95,10 @@ class UsuarioController extends Controller
                 //crear el usuario
                 $user=new usuario();
                 $user->nombre=$params_array['nombre'];
+                $user->apellido=$params_array['apellido'];
                 $user->telefono=$params_array['telefono'];
+                $user->direccion=$params_array['direccion'];
+                $user->ciudad=$params_array['ciudad'];
                 $user->correo=$params_array['correo'];
                 $user->contrasena=$pwd;
               

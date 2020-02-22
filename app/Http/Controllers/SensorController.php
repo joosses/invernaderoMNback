@@ -27,8 +27,8 @@ class SensorController extends Controller
         }
         return response()->json($data,$data['code']);
     }
-    public function showTemperaturaMin(){
-        $sensor=sensor::where('nombre','temperatura')->get()->last();
+    public function showTemperaturaMin($id){
+        $sensor=sensor::where('nombre','temperatura')->where('invernadero_id_invernadero',$id)->get();
 
         return response()->json([
             'code'=>200,
@@ -37,8 +37,8 @@ class SensorController extends Controller
         ],200);
     }
     
-    public function showHumedadMin(){
-        $sensor=sensor::where('nombre','humedad')->get()->last();
+    public function showHumedadMin($id){
+        $sensor=sensor::where('nombre','humedad')->where('invernadero_id_invernadero',$id)->get();
 
         return response()->json([
             'code'=>200,
@@ -46,8 +46,8 @@ class SensorController extends Controller
             'tiempo'=>$sensor
         ],200);
     }
-    public function showHumedadSueloMin(){
-        $sensor=sensor::where('nombre','humedadsuelo')->get()->last();
+    public function showHumedadSueloMin($id){
+        $sensor=sensor::where('nombre','humedadsuelo')->where('invernadero_id_invernadero',$id)->get();
 
         return response()->json([
             'code'=>200,
@@ -55,8 +55,8 @@ class SensorController extends Controller
             'tiempo'=>$sensor
         ],200);
     }
-    public function showCo2Min(){
-        $sensor=sensor::where('nombre','co2')->get()->last();
+    public function showCo2Min($id){
+        $sensor=sensor::where('nombre','co2')->where('invernadero_id_invernadero',$id)->get();
 
         return response()->json([
             'code'=>200,
@@ -124,6 +124,7 @@ class SensorController extends Controller
         $sensor->save();
 
     }
+    
 
     
     

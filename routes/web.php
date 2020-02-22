@@ -52,14 +52,15 @@ Route::get('/medicionHumedadSuelo','MedicionController@ultimaHumedadSuelo');
 Route::get('/medicionCo2','MedicionController@ultimaCo2');
 
 Route::get('/sensor/{id}','SensorController@show');
-Route::get('/temperaturamin','SensorController@showTemperaturaMin');
-Route::get('/humedadmin','SensorController@showHumedadMin');
-Route::get('/humedadsuelomin','SensorController@showHumedadSueloMin');
-Route::get('/co2min','SensorController@showCo2Min');
+Route::get('/temperaturamin/{id}','SensorController@showTemperaturaMin');
+Route::get('/humedadmin/{id}','SensorController@showHumedadMin');
+Route::get('/humedadsuelomin/{id}','SensorController@showHumedadSueloMin');
+Route::get('/co2min/{id}','SensorController@showCo2Min');
 Route::put('/sensoru/{id}','SensorController@update');
 Route::post('/sensor/nuevo','SensorController@nuevo');
 
 Route::get('/invernadero/{id}','InvernaderoController@show');
+Route::get('/invernaderob/{id}','InvernaderoController@buscar');
 Route::get('/invernadero','InvernaderoController@index');
 Route::put('/invernaderou/{id}','InvernaderoController@update');
 Route::post('/invernadero/inv','InvernaderoController@crear');

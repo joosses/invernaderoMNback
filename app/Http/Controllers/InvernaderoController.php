@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\invernadero;
+use App\usuario;
 use Illuminate\Http\Request;
 
 class InvernaderoController extends Controller
@@ -23,6 +24,7 @@ class InvernaderoController extends Controller
         $caracteristicas = $request->input("caracteristicas");
         $placa = $request->input("placa");
         $usuario_id_usuario = $request->input("usuario_id_usuario");
+        $chipid=$request->input("chipid");
         
         //en caso de no haber errores, guarda la medicion en la base de datos
         $invernadero=new invernadero();
@@ -31,6 +33,7 @@ class InvernaderoController extends Controller
         $invernadero->caracteristicas= $caracteristicas;
         $invernadero->placa=$placa;
         $invernadero->usuario_id_usuario=$usuario_id_usuario;
+        $invernadero->chipid=$chipid;
         $invernadero->save();
 
     }
@@ -72,6 +75,8 @@ class InvernaderoController extends Controller
                 $invernadero->caracteristicas=$params_array['caracteristicas'];
                 $invernadero->placa=$params_array['placa'];
                 $invernadero->usuario_id_usuario=['usuario_id_usuario'];
+                $invernadero->chipid=['chipid'];
+
               
                 
                 
@@ -150,4 +155,23 @@ class InvernaderoController extends Controller
         }
         return response()->json($data,$data['code']);
     }
+    public function buscar($id){
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->get();
+
+        if(is_object($invernadero)){
+            $data=[
+                'code'=>200,
+                'status'=>'success',
+                'invernadero'=>$invernadero
+            ];
+        }else{
+            $data=[
+                'code'=>404,
+                'status'=>'error',
+                'message'=>'El invernadero  no existe'
+            ];
+        }
+        return response()->json($data,$data['code']);
+    }
+    
 }
