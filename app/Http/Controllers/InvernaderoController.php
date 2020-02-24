@@ -10,7 +10,7 @@ class InvernaderoController extends Controller
 {
     //
     public function index(){
-        $invernadero=invernadero::all()->last();
+        $invernadero=invernadero::all();
         return response()->json([
             'code'=>200,
             'status'=>'success',
@@ -36,6 +36,66 @@ class InvernaderoController extends Controller
         $invernadero->chipid=$chipid;
         $invernadero->save();
 
+    }
+    public function register(Request $request)
+    {
+
+        //recoger los datos del usuario enviados por post
+        $json=$request->input('json',null);
+        $params=json_decode($json);               //decodifica los datos en un objeto
+        $params_array=json_decode($json,true);    //decodifica los datos en un array
+
+        //limpiar datos (quita espacios en blanco)
+        $params_array=array_map('trim',$params_array);
+
+        //validar datos
+        if(!empty($params) && !empty($params_array)){
+
+            $validate=\Validator::make($params_array,[
+                'cultivo'      =>'required|alpha',
+                
+            ]);
+
+            if($validate->fails()){
+                $data=array(
+                    'status' =>'error',
+                    'code'   =>404,
+                    'message'=>'El invernadero no se ha creado',
+                    'errores'=>$validate->errors()
+                );
+            }else{
+               
+             
+                //crear el invernadero
+                $invernadero=new invernadero();
+                $invernadero->cultivo=$params_array['cultivo'];
+                $invernadero->caracteristicas=$params_array['caracteristicas'];
+                $invernadero->placa=$params_array['placa'];
+                $invernadero->usuario_id_usuario=$params_array['usuario_id_usuario'];
+                $invernadero->chipid=$params_array['chipid'];
+      
+                //guardar el usuario
+                $invernadero->save();
+
+                $data=array(
+                    'status' =>'success',
+                    'code'   =>200,
+                    'message'=>'El invernadero se ha creado',
+                    'invernadero'   =>$invernadero
+                );
+            }
+
+        }else{
+            $data=array(
+                'status' =>'error',
+                'code'   =>404,
+                'message'=>'Los datos no se han ingresado correctamente',
+            );
+        }
+
+        return response()->json($data,$data['code']);
+
+       
     }
     public function crear(Request $request)
     {
@@ -157,6 +217,44 @@ class InvernaderoController extends Controller
     }
     public function buscar($id){
         $invernadero=invernadero::where('usuario_id_usuario',$id)->get();
+
+        if(is_object($invernadero)){
+            $data=[
+                'code'=>200,
+                'status'=>'success',
+                'invernadero'=>$invernadero
+            ];
+        }else{
+            $data=[
+                'code'=>404,
+                'status'=>'error',
+                'message'=>'El invernadero  no existe'
+            ];
+        }
+        return response()->json($data,$data['code']);
+    }
+    public function buscarDos($id){
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->get() ;
+        
+
+        if(is_object($invernadero)){
+            $data=[
+                'code'=>200,
+                'status'=>'success',
+                'invernadero'=>$invernadero
+            ];
+        }else{
+            $data=[
+                'code'=>404,
+                'status'=>'error',
+                'message'=>'El invernadero  no existe'
+            ];
+        }
+        return response()->json($data,$data['code']);
+    }
+    public function buscarNombre($id){
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->get();
+        
 
         if(is_object($invernadero)){
             $data=[

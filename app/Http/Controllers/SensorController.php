@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\invernadero;
 use App\sensor;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,9 @@ class SensorController extends Controller
         return response()->json($data,$data['code']);
     }
     public function showTemperaturaMin($id){
-        $sensor=sensor::where('nombre','temperatura')->where('invernadero_id_invernadero',$id)->get();
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->id;
+        $sensor=sensor::where('nombre','temperatura')->where('invernadero_id_invernadero',$var)->first();
 
         return response()->json([
             'code'=>200,
@@ -38,8 +41,9 @@ class SensorController extends Controller
     }
     
     public function showHumedadMin($id){
-        $sensor=sensor::where('nombre','humedad')->where('invernadero_id_invernadero',$id)->get();
-
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->id;
+        $sensor=sensor::where('nombre','humedad')->where('invernadero_id_invernadero',$var)->first();
         return response()->json([
             'code'=>200,
             'status'=>'success',
@@ -47,8 +51,10 @@ class SensorController extends Controller
         ],200);
     }
     public function showHumedadSueloMin($id){
-        $sensor=sensor::where('nombre','humedadsuelo')->where('invernadero_id_invernadero',$id)->get();
-
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->id;
+        $sensor=sensor::where('nombre','humedadsuelo')->where('invernadero_id_invernadero',$var)->first();
+        
         return response()->json([
             'code'=>200,
             'status'=>'success',
@@ -56,7 +62,9 @@ class SensorController extends Controller
         ],200);
     }
     public function showCo2Min($id){
-        $sensor=sensor::where('nombre','co2')->where('invernadero_id_invernadero',$id)->get();
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->id;
+        $sensor=sensor::where('nombre','co2')->where('invernadero_id_invernadero',$var)->first();
 
         return response()->json([
             'code'=>200,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\medicion;
+use App\invernadero;
 use Carbon\Traits\Timestamp;
 use Mockery\Matcher\Any;
 
@@ -185,37 +186,46 @@ $data=[
     'message'=> 'No has enviado ninguna entrevista.'
 ];  
     }
-    public function ultimaTemperatura(){
-        $medicions=medicion::where('nombre','Temperatura')->get()->last();
+    public function ultimaTemperatura($id){
+        
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->chipid;
+        $medicion=medicion::where('nombre','temperatura')->where('chipid',$var)->get()->last();
         return response()->json([
             'code'=>200,
             'status'=>'success',
-            'medicion'=>$medicions
+            'medicion'=>$medicion
         ],200);
     }
     
-    public function ultimaHumedad(){
-        $medicions=medicion::where('nombre','Humedad')->get()->last();
+    public function ultimaHumedad($id){
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->chipid;
+        $medicion=medicion::where('nombre','humedad')->where('chipid',$var)->get()->last();
         return response()->json([
             'code'=>200,
             'status'=>'success',
-            'medicion'=>$medicions
+            'medicion'=>$medicion
         ],200);
     }
-    public function ultimaHumedadSuelo(){
-        $medicions=medicion::where('nombre','Humedad Suelo')->get()->last();
+    public function ultimaHumedadSuelo($id){
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->chipid;
+        $medicion=medicion::where('nombre','humedad suelo')->where('chipid',$var)->get()->last();
         return response()->json([
             'code'=>200,
             'status'=>'success',
-            'medicion'=>$medicions
+            'medicion'=>$medicion
         ],200);
     }
-    public function ultimaCo2(){
-        $medicions=medicion::where('nombre','Co2')->get()->last();
+    public function ultimaCo2($id){
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->chipid;
+        $medicion=medicion::where('nombre','co2')->where('chipid',$var)->get()->last();
         return response()->json([
             'code'=>200,
             'status'=>'success',
-            'medicion'=>$medicions
+            'medicion'=>$medicion
         ],200);
     }
 

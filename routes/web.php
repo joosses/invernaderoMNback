@@ -45,11 +45,11 @@ Route::post('/medicion/hum','MedicionController@medicionHumedad');
 Route::post('/medicion/suel','MedicionController@medicionSuelo');
 Route::post('/medicion/co2','MedicionController@medicionCo2');
 
-Route::get('/medicionHumedad','MedicionController@ultimaHumedad');
+Route::get('/medicionhumedad/{id}','MedicionController@ultimaHumedad');
 Route::get('/grafica','MedicionController@grafica');
-Route::get('/medicionTemperatura','MedicionController@ultimaTemperatura');
-Route::get('/medicionHumedadSuelo','MedicionController@ultimaHumedadSuelo');
-Route::get('/medicionCo2','MedicionController@ultimaCo2');
+Route::get('/mediciontemperatura/{id}','MedicionController@ultimaTemperatura');
+Route::get('/medicionhumedadsuelo/{id}','MedicionController@ultimaHumedadSuelo');
+Route::get('/medicionco2/{id}','MedicionController@ultimaCo2');
 
 Route::get('/sensor/{id}','SensorController@show');
 Route::get('/temperaturamin/{id}','SensorController@showTemperaturaMin');
@@ -60,11 +60,15 @@ Route::put('/sensoru/{id}','SensorController@update');
 Route::post('/sensor/nuevo','SensorController@nuevo');
 
 Route::get('/invernadero/{id}','InvernaderoController@show');
+
+Route::get('/invernaderonombre/{id}','InvernaderoController@buscarNombre');
 Route::get('/invernaderob/{id}','InvernaderoController@buscar');
+Route::get('/invernabusca/{id}','InvernaderoController@buscarDos');
 Route::get('/invernadero','InvernaderoController@index');
 Route::put('/invernaderou/{id}','InvernaderoController@update');
-Route::post('/invernadero/inv','InvernaderoController@crear');
-Route::post('/invernadero/nuevo','InvernaderoController@nuevo');
+Route::post('/inverna/crear','InvernaderoController@crear');
+Route::post('/invernadero/crear','InvernaderoController@register');
+Route::post('/invernaderon/nuevo','InvernaderoController@nuevo');
 
 
 Route::post('/medicion/crear2','MedicionController@prueba');
