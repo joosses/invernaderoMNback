@@ -31,6 +31,7 @@ Route::get('/actuadorB/{id}','ActuadorController@show');
 Route::get('/actuadorluz','ActuadorController@showLuz');
 Route::get('/actuadoragua','ActuadorController@showAgua');
 Route::get('/actuadorextractor','ActuadorController@showExtractor');
+Route::post('/actuador/registrar','ActuadorController@register');
 
 
 
@@ -58,6 +59,7 @@ Route::get('/humedadsuelomin/{id}','SensorController@showHumedadSueloMin');
 Route::get('/co2min/{id}','SensorController@showCo2Min');
 Route::put('/sensoru/{id}','SensorController@update');
 Route::post('/sensor/nuevo','SensorController@nuevo');
+Route::post('/sensor/registrar','SensorController@register');
 
 Route::get('/invernadero/{id}','InvernaderoController@show');
 

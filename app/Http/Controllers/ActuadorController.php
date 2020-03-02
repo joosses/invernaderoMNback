@@ -141,6 +141,67 @@ class ActuadorController extends Controller
         
         return response()->json($data,$data['code']);
     }
+    public function register(Request $request)
+    {
+
+        //recoger los datos del Sensor enviados por post
+        $json=$request->input('json',null);
+        $params=json_decode($json);               //decodifica los datos en un objeto
+        $params_array=json_decode($json,true);    //decodifica los datos en un array
+
+        //limpiar datos (quita espacios en blanco)
+        $params_array=array_map('trim',$params_array);
+
+        //validar datos
+        if(!empty($params) && !empty($params_array)){
+
+            $validate=\Validator::make($params_array,[
+                'nombre'      =>'required|alpha',
+                'invernadero_id_invernadero'   =>'required|numeric',
+            ]);
+
+            if($validate->fails()){
+                $data=array(
+                    'status' =>'error',
+                    'code'   =>404,
+                    'message'=>'El Actuador no se ha creado',
+                    'errores'=>$validate->errors()
+                );
+            }else{
+                
+                //crear el Actuador
+                $act=new actuador();
+               
+                $act->estado=$params_array['estado'];
+                $act->nombre=$params_array['nombre'];
+                $act->caracteristica=$params_array['caracteristica'];
+                $act->invernadero_id_invernadero=$params_array['invernadero_id_invernadero'];
+                
+                
+                
+                //guardar el Sensor
+                $act->save();
+
+                $data=array(
+                    'status' =>'success',
+                    'code'   =>200,
+                    'message'=>'El Actuador se ha creado',
+                    'usuario'   =>$act
+                );
+            }
+
+        }else{
+            $data=array(
+                'status' =>'error',
+                'code'   =>404,
+                'message'=>'Los datos no se han ingresado correctamente',
+            );
+        }
+
+        return response()->json($data,$data['code']);
+
+       
+    }
 
     
 }
