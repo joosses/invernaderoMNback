@@ -19,7 +19,7 @@ class usuario extends Model
      * @var array
      */
     protected $fillable = [
-        'id','nombre','apellido','telefono','direccion','ciudad', 'correo','contrasena'
+        'id','nombre','apellido','telefono','direccion','ciudad', 'correo','contrasena', 'rol_id_rol'
     ];
 
     /**
