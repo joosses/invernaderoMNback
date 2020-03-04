@@ -48,6 +48,10 @@ Route::post('/medicion/co2','MedicionController@medicionCo2');
 
 Route::get('/medicionhumedad/{id}','MedicionController@ultimaHumedad');
 Route::get('/grafica','MedicionController@grafica');
+Route::get('/graficat/{id}','MedicionController@graficaTemperatura');
+Route::get('/graficah/{id}','MedicionController@graficaHumedad');
+Route::get('/graficahs/{id}','MedicionController@graficaHumedadSuelo');
+Route::get('/graficac/{id}','MedicionController@graficaCo2');
 Route::get('/mediciontemperatura/{id}','MedicionController@ultimaTemperatura');
 Route::get('/medicionhumedadsuelo/{id}','MedicionController@ultimaHumedadSuelo');
 Route::get('/medicionco2/{id}','MedicionController@ultimaCo2');

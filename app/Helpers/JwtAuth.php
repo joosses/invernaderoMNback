@@ -46,6 +46,7 @@ class JwtAuth
                 'name' => $user->nombre,
                 'telefono' => $user->telefono,
                 'correo' => $user->correo,
+                'rol'=>$user->rol_id_rol,
                 'iat' => time(),
                 'exp' => time() + (7 * 24 * 60 * 60)  //tiempo en que expira la sesion de inicio
             );

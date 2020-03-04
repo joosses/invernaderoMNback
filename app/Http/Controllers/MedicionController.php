@@ -30,6 +30,94 @@ class MedicionController extends Controller
             'medicion'=>$medicions
         ],200);
     }
+    public function graficaTemperatura($id){
+        
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->chipid;
+        $medicion=medicion::where('nombre','temperatura')->where('chipid',$var)->get();
+        
+
+
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'medicion'=>$medicion
+        ],200);
+    }
+    public function graficaHumedad($id){
+        
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->chipid;
+        $medicion=medicion::where('nombre','humedad')->where('chipid',$var)->get();
+        
+
+
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'medicion'=>$medicion
+        ],200);
+    }
+    public function graficaHumedadSuelo($id){
+        
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->chipid;
+        $medicion=medicion::where('nombre','humedad suelo')->where('chipid',$var)->get();
+        
+
+
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'medicion'=>$medicion
+        ],200);
+    }
+    public function graficaCo2($id){
+        
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->chipid;
+        $medicion=medicion::where('nombre','co2')->where('chipid',$var)->get();
+        
+
+
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'medicion'=>$medicion
+        ],200);
+    }
+    public function showHumedadMin($id){
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->id;
+        $sensor=sensor::where('nombre','humedad')->where('invernadero_id_invernadero',$var)->first();
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'tiempo'=>$sensor
+        ],200);
+    }
+    public function showHumedadSueloMin($id){
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->id;
+        $sensor=sensor::where('nombre','humedadsuelo')->where('invernadero_id_invernadero',$var)->first();
+        
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'tiempo'=>$sensor
+        ],200);
+    }
+    public function showCo2Min($id){
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->id;
+        $sensor=sensor::where('nombre','co2')->where('invernadero_id_invernadero',$var)->first();
+
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'tiempo'=>$sensor
+        ],200);
+    }
 /*
     public function index(Request $request){
         
