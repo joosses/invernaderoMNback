@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\actuador;
+use App\invernadero;
 use Illuminate\Http\Request;
 
 
@@ -71,8 +72,10 @@ class ActuadorController extends Controller
         }
         return response()->json($data, $data['code']);
     }
-    public function showLuz(){
-        $actuador=actuador::where('nombre','luz')->get()->last();
+    public function showLuz($id){
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->id;
+        $actuador=actuador::where('nombre','luz')->where('invernadero_id_invernadero',$var)->get();
 
         return response()->json([
             'code'=>200,
@@ -80,8 +83,12 @@ class ActuadorController extends Controller
             'tiempo'=>$actuador
         ],200);
     }
-    public function showAgua(){
-        $actuador=actuador::where('nombre','agua')->get()->last();
+    public function showAgua($id){
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->id;
+     
+        $actuador=actuador::where('nombre','agua')->where('invernadero_id_invernadero',$var)->get();
+       
 
         return response()->json([
             'code'=>200,
@@ -89,8 +96,25 @@ class ActuadorController extends Controller
             'tiempo'=>$actuador
         ],200);
     }
-    public function showExtractor(){
-        $actuador=actuador::where('nombre','extractor')->get()->last();
+    public function showExtractor($id){
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->id;
+     
+        $actuador=actuador::where('nombre','extractor')->where('invernadero_id_invernadero',$var)->get();
+       
+
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'tiempo'=>$actuador
+        ],200);
+    }
+    public function showExtractor2($id){
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->id;
+     
+        $actuador=actuador::where('nombre','ventilador2')->where('invernadero_id_invernadero',$var)->get();
+        
 
         return response()->json([
             'code'=>200,

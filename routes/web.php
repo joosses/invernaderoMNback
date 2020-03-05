@@ -28,9 +28,10 @@ Route::put('/actuadoru/{id}','ActuadorController@update');
 Route::put('/actuadorreset/{id}','ActuadorController@resetTiempo');
 Route::get('/actuador','ActuadorController@index');
 Route::get('/actuadorB/{id}','ActuadorController@show');
-Route::get('/actuadorluz','ActuadorController@showLuz');
-Route::get('/actuadoragua','ActuadorController@showAgua');
-Route::get('/actuadorextractor','ActuadorController@showExtractor');
+Route::get('/actuadorluz/{id}','ActuadorController@showLuz');
+Route::get('/actuadoragua/{id}','ActuadorController@showAgua');
+Route::get('/actuadorextractor/{id}','ActuadorController@showExtractor');
+Route::get('/actuadorextractor2/{id}','ActuadorController@showExtractor2');
 Route::post('/actuador/registrar','ActuadorController@register');
 
 
