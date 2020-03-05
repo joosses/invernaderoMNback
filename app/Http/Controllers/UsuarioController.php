@@ -79,7 +79,7 @@ class UsuarioController extends Controller
                 'ciudad'    =>'required|alpha',
                 'correo'     =>'required|email|unique:usuario',  //unique:users, verifica que sea unico en la tabla usuarios(no puede haber 2 usuarios con le mismo correo)
                 'contrasena'  =>'required',
-                'rol_id_rol' =>'required|alpha'
+               
             ]);
 
             if($validate->fails()){
@@ -102,7 +102,7 @@ class UsuarioController extends Controller
                 $user->ciudad=$params_array['ciudad'];
                 $user->correo=$params_array['correo'];
                 $user->contrasena=$pwd;
-                $user->rol_id_rol=$params_array['rol_id_rol'];
+                $user->rol_id_rol=$params_array['rol'];
 
               
                 
