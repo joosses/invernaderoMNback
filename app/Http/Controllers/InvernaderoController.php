@@ -17,6 +17,14 @@ class InvernaderoController extends Controller
             'invernadero'=>$invernadero
         ],200);
     }
+    public function lista(){
+        $invernadero=invernadero::all();
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'invernadero'=>$invernadero
+        ],200);
+    }
     public function nuevo(Request $request){
         
         //Recoger los datos por post

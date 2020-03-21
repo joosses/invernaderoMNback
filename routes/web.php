@@ -22,6 +22,7 @@ Route::post('/usuario/upload','UsuarioController@upload')->middleware(ApiAuthMid
 Route::get('/usuario/image/{filename}','UsuarioController@getImage');
 Route::put('/userDisable/{id}','UsuarioController@disable');
 Route::delete('/usuario/{id}','UsuarioController@destroy');
+Route::get('/usuarioBuscar','UsuarioController@lista');
 
 
 Route::put('/actuadoru/{id}','ActuadorController@update');
@@ -41,6 +42,7 @@ Route::post('/actuador/registrar','ActuadorController@register');
 
 Route::get('/marcas','autoController@index');
 Route::get('/medicion','MedicionController@index');
+Route::get('/medicion/{id}','MedicionController@show');
 Route::post('/medicion/temp','MedicionController@medicionTemperatura');
 Route::post('/medicion/prueba','MedicionController@prueba');
 Route::post('/medicion/hum','MedicionController@medicionHumedad');
@@ -76,6 +78,7 @@ Route::put('/invernaderou/{id}','InvernaderoController@update');
 Route::post('/inverna/crear','InvernaderoController@crear');
 Route::post('/invernadero/crear','InvernaderoController@register');
 Route::post('/invernaderon/nuevo','InvernaderoController@nuevo');
+Route::get('/invernaderoBuscar','InvernaderoController@lista');
 
 
 Route::post('/medicion/crear2','MedicionController@prueba');

@@ -53,6 +53,14 @@ class UsuarioController extends Controller
         }
         return response()->json($data, $data['code']);
     }
+    public function lista(){
+        $usuario=usuario::all();
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'usuario'=>$usuario
+        ],200);
+    }
 
     /**
      * funcion para registrar un nuevo usuario

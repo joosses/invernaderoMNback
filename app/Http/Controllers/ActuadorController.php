@@ -58,17 +58,17 @@ class ActuadorController extends Controller
 
 
         if (is_object($actuador)) {
-            $data = array(
+            $data = [
                 'code'=>200,
                 'status' => 'success',
-                'estado' => $actuador->estado
-            );
+                'tiempo' => $actuador->estado
+            ];
         } else {
-            $data = array(
+            $data = [
                 'code' => 404,
                 'status' => 'error',
                 'message' => 'El usuario no existe'
-            );
+            ];
         }
         return response()->json($data, $data['code']);
     }

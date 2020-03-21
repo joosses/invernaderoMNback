@@ -21,6 +21,24 @@ class MedicionController extends Controller
             'medicion'=>$medicions
         ],200);
     }
+    public function show($id){
+        $medicions=medicion::find($id);
+
+        if(is_object($medicions)){
+            $data=[
+                'code'=>200,
+                'status'=>'success',
+                'estado'=>$medicions->estado
+            ];
+        }else{
+            $data=[
+                'code'=>404,
+                'status'=>'error',
+                'message'=>'El tiempo  no existe'
+            ];
+        }
+        return response()->json($data,$data['code']);
+    }
 
     public function grafica(){
         $medicions=medicion::all();
