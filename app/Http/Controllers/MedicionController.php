@@ -39,6 +39,7 @@ class MedicionController extends Controller
         }
         return response()->json($data,$data['code']);
     }
+    
 
     public function grafica(){
         $medicions=medicion::all();

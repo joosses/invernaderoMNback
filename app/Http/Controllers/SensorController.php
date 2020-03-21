@@ -28,6 +28,16 @@ class SensorController extends Controller
         }
         return response()->json($data,$data['code']);
     }
+    public function lista($id){
+        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+        $var = $invernadero->id;
+        $sensor=sensor::where('invernadero_id_invernadero',$var)->all();
+        return response()->json([
+            'code'=>200,
+            'status'=>'success',
+            'sensor'=>$sensor
+        ],200);
+    }
     public function showTemperaturaMin($id){
         $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
         $var = $invernadero->id;
