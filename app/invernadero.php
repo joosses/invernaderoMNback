@@ -11,6 +11,6 @@ class invernadero extends Model
     
     protected $table='invernadero';
     protected $fillable = [
-        'id','cultivo','caracteristicas','placa','usuario_id_usuario','chipid'
+        'id','cultivo','caracteristicas','placa','usuario_id_usuario','chipid','estado'
     ];
 }

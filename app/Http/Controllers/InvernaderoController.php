@@ -25,6 +25,29 @@ class InvernaderoController extends Controller
             'invernadero'=>$invernadero
         ],200);
     }
+    public function tabla(){
+      
+        $invernadero = \DB::table('invernadero')
+            ->join('usuario','usuario_id_usuario','=','usuario.id')
+            ->select('invernadero.id','invernadero.usuario_id_usuario','cultivo','invernadero.placa','nombre','correo','chipid','estado')
+            ->orderBy('nombre', 'desc')
+            ->get();      
+
+        if(is_object($invernadero)){
+            $data=[
+                'code'=>200,
+                'status'=>'success',
+                'invernadero'=>$invernadero
+            ];
+        }else{
+            $data=[
+                'code'=>404,
+                'status'=>'error',
+                'message'=>'El invernadero  no existe'
+            ];
+        }
+        return response()->json($data,$data['code']);
+    }
     public function nuevo(Request $request){
         
         //Recoger los datos por post
@@ -42,6 +65,7 @@ class InvernaderoController extends Controller
         $invernadero->placa=$placa;
         $invernadero->usuario_id_usuario=$usuario_id_usuario;
         $invernadero->chipid=$chipid;
+        
         $invernadero->save();
 
     }

@@ -82,6 +82,7 @@ Route::post('/inverna/crear','InvernaderoController@crear');
 Route::post('/invernadero/crear','InvernaderoController@register');
 Route::post('/invernaderon/nuevo','InvernaderoController@nuevo');
 Route::get('/invernaderoBuscar','InvernaderoController@lista');
+Route::get('/tabla','InvernaderoController@tabla');
 
 
 Route::post('/medicion/crear2','MedicionController@prueba');
