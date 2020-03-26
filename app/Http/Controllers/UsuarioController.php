@@ -110,7 +110,7 @@ class UsuarioController extends Controller
                 $user->ciudad=$params_array['ciudad'];
                 $user->correo=$params_array['correo'];
                 $user->contrasena=$pwd;
-                $user->rol_id_rol=$params_array['rol'];
+                $user->rol=$params_array['rol'];
 
               
                 
@@ -184,6 +184,41 @@ class UsuarioController extends Controller
     /**
      * update actualia el user con los datos que recibe por parametro
      */
+    public function update2($id,Request $request){
+
+        //Recoger datos por post
+        $json=$request->input('json',null);
+        $params_array=json_decode($json,true);
+
+        if(!empty($params_array)){
+            //Validar los datos s
+            $validate=\Validator::make($params_array,[
+                'id' => 'required',
+            ]);
+
+            //quitar los datos que no quiero actualizar
+            unset($params_array['id']);
+            unset($params_array['contrasena']);
+            //unset($params_array['contrasena']);
+
+            //actualizar el registro de modelo
+            $usuario=usuario::where('id',$id)->update($params_array);
+
+            $data=[
+                'code'=>200,
+                'status'=>'success',
+                'usuario'=>$params_array
+            ];
+
+        }else{
+            $data=[
+                'code'=>400,
+                'status'=>'error',
+                'message'=> 'No has enviado ningun usuario.'
+            ];
+        }
+        return response()->json($data,$data['code']);
+    }
     public function update(Request $request)
     {
 

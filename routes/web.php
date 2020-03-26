@@ -23,6 +23,7 @@ Route::get('/usuario/image/{filename}','UsuarioController@getImage');
 Route::put('/userDisable/{id}','UsuarioController@disable');
 Route::delete('/usuario/{id}','UsuarioController@destroy');
 Route::get('/usuarioBuscar','UsuarioController@lista');
+Route::put('/usuariou/{id}','UsuarioController@update2');
 
 
 Route::put('/actuadoru/{id}','ActuadorController@update');
