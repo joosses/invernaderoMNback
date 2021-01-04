@@ -3,17 +3,14 @@
 namespace App\Helpers;
 
 use Firebase\JWT\JWT;
-use Iluminate\Support\Facades\DB;
-use App\usuario;
+use App\Usuario;
 
 class JwtAuth
 {
-    //buscar si existe el usuario con su credencial
-    //comprobar si son correctos
+    //Buscar si existe el usuario con su credencial
+    //Comprobar si son correctos
     //Generar el Token con los datos
-    //devolver los datos decodificados o el token, en funcion de un parametro
-
-
+    //Devolver los datos decodificados o el token, en funcion de un parametro
     public $key;
 
     public function __construct()
@@ -22,34 +19,34 @@ class JwtAuth
     }
 
     /**
-     * Funcion para el acceso de usuario 
+     * Función para el acceso de usuario 
      */
     public function signup($correo, $contrasena, $getToken = null)
     {
-        //buscar si existe el usuario con sus credenciales
-        $user = usuario::where([
+        // Buscar si existe el usuario con sus credenciales
+        $user = Usuario::where([
             'correo' => $correo,
             'contrasena' => $contrasena
         ])->first();
 
-        //comprobar si son correctas 
+        // Comprobar si son correctas 
         $signup = false;
         if (is_object($user)) {
             $signup = true;
         }
 
-        //Generar el token con los datos del usuario identificado
-
+        // Generar el token con los datos del usuario identificado
         if ($signup) {
-            $token = array(
+            $token = [
                 'sub' => $user->id,
                 'name' => $user->nombre,
                 'telefono' => $user->telefono,
                 'correo' => $user->correo,
-                'rol'=>$user->rol_id_rol,
+                'rol' => $user->rol_id_rol,
                 'iat' => time(),
                 'exp' => time() + (7 * 24 * 60 * 60)  //tiempo en que expira la sesion de inicio
-            );
+            ];
+
             $jwt = JWT::encode($token, $this->key, 'HS256');  //codifica el token (los datos del usuario)
             $decoded = JWT::decode($jwt, $this->key, ['HS256']); //decodifica el token y entrega la información del token (datos del usuario)
 
@@ -60,10 +57,10 @@ class JwtAuth
                 $data = $decoded;
             }
         } else {
-            $data = array(
+            $data = [
                 'status' => 'error',
                 'message' => 'Login incorrecto'
-            );
+            ];
         }
 
         return $data;
@@ -73,7 +70,8 @@ class JwtAuth
      * funcion para checkear el token de usuario
      */
     public function checkToken($jwt, $getIdentity = false)
-    { //getIdentity es un boolean, en caso de querer recibir los datos del usuario debe ir como true
+    {
+        //getIdentity es un boolean, en caso de querer recibir los datos del usuario debe ir como true
         $auth = false;
 
         try {

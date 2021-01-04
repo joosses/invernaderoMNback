@@ -5,61 +5,71 @@ namespace App\Http\Controllers;
 use App\actuador;
 use App\invernadero;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 
 class ActuadorController extends Controller
 {
     //
-    public function update($id,Request $request){
+    public function update($id, Request $request)
+    {
 
         //Recoger datos por post
-        $json=$request->input('json',null);
-        $params_array=json_decode($json,true);
+        $json = $request->input('json', null);
+        $params_array = json_decode($json, true);
 
-        if(!empty($params_array)){
+        if (!empty($params_array)) {
             //Validar los datos
-            $validate=\Validator::make($params_array,[
+            $validate = Validator::make($params_array, [
                 'id' => 'required',
             ]);
 
             //quitar los datos que no quiero actualizar
-           
             unset($params_array['id']);
 
             //actualizar el registro de modelo
-            $actuador=actuador::where('id',$id)->update($params_array);
+            $actuador = Actuador::where('id', $id)->update($params_array);
 
-            $data=[
-                'code'=>200,
-                'status'=>'success',
-                'actuador'=>$params_array
+            $data = [
+                'code' => 200,
+                'status' => 'success',
+                'actuador' => $params_array
             ];
-
-        }else{
-            $data=[
-                'code'=>400,
-                'status'=>'error',
-                'message'=> 'No has enviado ningun actuador.'
+        } else {
+            $data = [
+                'code' => 400,
+                'status' => 'error',
+                'message' => 'No has enviado ningun actuador.'
             ];
         }
-        return response()->json($data,$data['code']);
+        return response()->json($data, $data['code']);
     }
-    public function index(){
-        $marcas=actuador::all();
-        return response()->json([
-            'code'=>200,
-            'status'=>'success',
-            'actuador'=>$marcas
-        ],200);
-    }
-    public function show($id)
-    {
-        $actuador = actuador::find($id);
 
+    /**
+     * Show all the "Actuador" instances
+     * @return mixed
+     */
+    public function index()
+    {
+        $marcas = Actuador::all();
+        return response()->json([
+            'code' => 200,
+            'status' => 'success',
+            'actuador' => $marcas
+        ], 200);
+    }
+
+    /**
+     * Show a single "actuador"
+     * @param   int  $id
+     * @return mixed
+     */
+    public function show(int $id)
+    {
+        $actuador = Actuador::find($id);
 
         if (is_object($actuador)) {
             $data = [
-                'code'=>200,
+                'code' => 200,
                 'status' => 'success',
                 'tiempo' => $actuador->estado
             ];
@@ -72,160 +82,174 @@ class ActuadorController extends Controller
         }
         return response()->json($data, $data['code']);
     }
-    public function showLuz($id){
-        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+
+    /**
+     * Show a light control
+     * @param int $id
+     * @return mixed
+     */
+    public function showLuz(int $id)
+    {
+        $invernadero = invernadero::where('usuario_id_usuario', $id)->first();
         $var = $invernadero->id;
-        $actuador=actuador::where('nombre','luz')->where('invernadero_id_invernadero',$var)->get();
+        $actuador = Actuador::where('nombre', 'luz')->where('invernadero_id_invernadero', $var)->get();
 
         return response()->json([
-            'code'=>200,
-            'status'=>'success',
-            'tiempo'=>$actuador
-        ],200);
+            'code' => 200,
+            'status' => 'success',
+            'tiempo' => $actuador
+        ], 200);
     }
-    public function showAgua($id){
-        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+
+    public function showAgua(int $id)
+    {
+        $invernadero = invernadero::where('usuario_id_usuario', $id)->first();
         $var = $invernadero->id;
-     
-        $actuador=actuador::where('nombre','agua')->where('invernadero_id_invernadero',$var)->get();
-       
+
+        $actuador = Actuador::where('nombre', 'agua')->where('invernadero_id_invernadero', $var)->get();
+
 
         return response()->json([
-            'code'=>200,
-            'status'=>'success',
-            'tiempo'=>$actuador
-        ],200);
+            'code' => 200,
+            'status' => 'success',
+            'tiempo' => $actuador
+        ], 200);
     }
-    public function showExtractor($id){
-        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+
+    public function showExtractor(int $id)
+    {
+        $invernadero = invernadero::where('usuario_id_usuario', $id)->first();
         $var = $invernadero->id;
-     
-        $actuador=actuador::where('nombre','extractor')->where('invernadero_id_invernadero',$var)->get();
-       
+
+        $actuador = Actuador::where('nombre', 'extractor')->where('invernadero_id_invernadero', $var)->get();
+
 
         return response()->json([
-            'code'=>200,
-            'status'=>'success',
-            'tiempo'=>$actuador
-        ],200);
+            'code' => 200,
+            'status' => 'success',
+            'tiempo' => $actuador
+        ], 200);
     }
-    public function showExtractor2($id){
-        $invernadero=invernadero::where('usuario_id_usuario',$id)->first();
+
+    public function showExtractor2(int $id)
+    {
+        $invernadero = invernadero::where('usuario_id_usuario', $id)->first();
         $var = $invernadero->id;
-     
-        $actuador=actuador::where('nombre','ventilador2')->where('invernadero_id_invernadero',$var)->get();
-        
+
+        $actuador = Actuador::where('nombre', 'ventilador2')->where('invernadero_id_invernadero', $var)->get();
+
 
         return response()->json([
-            'code'=>200,
-            'status'=>'success',
-            'tiempo'=>$actuador
-        ],200);
+            'code' => 200,
+            'status' => 'success',
+            'tiempo' => $actuador
+        ], 200);
     }
-    public function resetTiempo($id,Request $request){
+
+    /**
+     * Reset the time.
+     * @param   int      $id     
+     * @param   Request  $request
+     * @return  mixed
+     */
+    public function resetTiempo(int $id, Request $request)
+    {
 
 
         //Recoger datos por post
-       
-        $json=$request->input('json',null);
-       
-        
-        $params_array=json_decode($json,true);
-        //$auxiliar->estado=0;
-        
 
-        if(!empty($params_array)){
+        $json = $request->input('json', null);
+
+
+        $params_array = json_decode($json, true);
+        //$auxiliar->estado=0;
+
+
+        if (!empty($params_array)) {
             //Validar los datos
-            $validate=\Validator::make($params_array,[
+            $validate = Validator::make($params_array, [
                 'id' => 'required',
             ]);
 
             //quitar los datos que no quiero actualizar
-           
+
             unset($params_array['id']);
 
             //actualizar el registro de modelo
-            $params_array['estado']=0;
-            
-            $actuador=actuador::where('id',$id)->update($params_array);
-           
-            $data=[
-                'code'=>200,
-                'status'=>'success',
-                'actuador'=>$params_array
-            ];
+            $params_array['estado'] = 0;
 
-        }else{
-            $data=[
-                'code'=>400,
-                'status'=>'error',
-                'message'=> 'No has enviado ningun actuador aguaaaaa.'
+            $actuador = Actuador::where('id', $id)->update($params_array);
+
+            $data = [
+                'code' => 200,
+                'status' => 'success',
+                'actuador' => $params_array
+            ];
+        } else {
+            $data = [
+                'code' => 400,
+                'status' => 'error',
+                'message' => 'No has enviado ningun actuador aguaaaaa.'
             ];
         }
-        
-        return response()->json($data,$data['code']);
+
+        return response()->json($data, $data['code']);
     }
+
     public function register(Request $request)
     {
 
         //recoger los datos del Sensor enviados por post
-        $json=$request->input('json',null);
-        $params=json_decode($json);               //decodifica los datos en un objeto
-        $params_array=json_decode($json,true);    //decodifica los datos en un array
+        $json = $request->input('json', null);
+        $params = json_decode($json);               //decodifica los datos en un objeto
+        $params_array = json_decode($json, true);    //decodifica los datos en un array
 
         //limpiar datos (quita espacios en blanco)
-        $params_array=array_map('trim',$params_array);
+        $params_array = array_map('trim', $params_array);
 
         //validar datos
-        if(!empty($params) && !empty($params_array)){
+        if (!empty($params) && !empty($params_array)) {
 
-            $validate=\Validator::make($params_array,[
-                'nombre'      =>'required|alpha',
-                'invernadero_id_invernadero'   =>'required|numeric',
+            $validate = Validator::make($params_array, [
+                'nombre'      => 'required|alpha',
+                'invernadero_id_invernadero'   => 'required|numeric',
             ]);
 
-            if($validate->fails()){
-                $data=array(
-                    'status' =>'error',
-                    'code'   =>404,
-                    'message'=>'El Actuador no se ha creado',
-                    'errores'=>$validate->errors()
+            if ($validate->fails()) {
+                $data = array(
+                    'status' => 'error',
+                    'code'   => 404,
+                    'message' => 'El Actuador no se ha creado',
+                    'errores' => $validate->errors()
                 );
-            }else{
-                
+            } else {
+
                 //crear el Actuador
-                $act=new actuador();
-               
-                $act->estado=$params_array['estado'];
-                $act->nombre=$params_array['nombre'];
-                $act->caracteristica=$params_array['caracteristica'];
-                $act->invernadero_id_invernadero=$params_array['invernadero_id_invernadero'];
-                
-                
-                
+                $act = new actuador();
+
+                $act->estado = $params_array['estado'];
+                $act->nombre = $params_array['nombre'];
+                $act->caracteristica = $params_array['caracteristica'];
+                $act->invernadero_id_invernadero = $params_array['invernadero_id_invernadero'];
+
                 //guardar el Sensor
                 $act->save();
 
-                $data=array(
-                    'status' =>'success',
-                    'code'   =>200,
-                    'message'=>'El Actuador se ha creado',
-                    'usuario'   =>$act
+                $data = array(
+                    'status' => 'success',
+                    'code'   => 200,
+                    'message' => 'El Actuador se ha creado',
+                    'usuario'   => $act
                 );
             }
-
-        }else{
-            $data=array(
-                'status' =>'error',
-                'code'   =>404,
-                'message'=>'Los datos no se han ingresado correctamente',
+        } else {
+            $data = array(
+                'status' => 'error',
+                'code'   => 404,
+                'message' => 'Los datos no se han ingresado correctamente',
             );
         }
 
-        return response()->json($data,$data['code']);
-
-       
+        return response()->json($data, $data['code']);
     }
-
-    
 }

@@ -13,6 +13,8 @@
 //RUTAS PARA 
 //use App\Http\Middleware\ApiAuthMiddleware;
 
+use Illuminate\Routing\Route;
+
 Route::get('/usuario','UsuarioController@index');
 Route::get('/usuario/{id}','UsuarioController@show');
 Route::post('/usuario/crear','UsuarioController@register');
@@ -35,11 +37,6 @@ Route::get('/actuadoragua/{id}','ActuadorController@showAgua');
 Route::get('/actuadorextractor/{id}','ActuadorController@showExtractor');
 Route::get('/actuadorextractor2/{id}','ActuadorController@showExtractor2');
 Route::post('/actuador/registrar','ActuadorController@register');
-
-
-
-
-
 
 Route::get('/marcas','autoController@index');
 Route::get('/medicion','MedicionController@index');

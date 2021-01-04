@@ -4,14 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class usuario extends Model
+class Usuario extends Model
 {
-    //
     use Notifiable;
-    protected $table='usuario';
+    protected $table = 'usuario';
     public $timestamps = false;
     /**
      * The attributes that are mass assignable.
@@ -19,7 +16,7 @@ class usuario extends Model
      * @var array
      */
     protected $fillable = [
-        'id','nombre','apellido','telefono','direccion','ciudad', 'correo','contrasena', 'rol_id_rol'
+        'id', 'nombre', 'apellido', 'telefono', 'direccion', 'ciudad', 'correo', 'contrasena', 'rol_id_rol'
     ];
 
     /**
@@ -41,6 +38,8 @@ class usuario extends Model
     ];
 
     //relacion uno a muchos de usuario-invernadero
-   
- 
+    public function invernaderos()
+    {
+        $this->hasMany(Invernadero::class);
+    }
 }
