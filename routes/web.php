@@ -12,8 +12,7 @@
 */
 //RUTAS PARA 
 //use App\Http\Middleware\ApiAuthMiddleware;
-
-use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/usuario','UsuarioController@index');
 Route::get('/usuario/{id}','UsuarioController@show');

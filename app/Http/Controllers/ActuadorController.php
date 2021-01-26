@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\actuador;
-use App\invernadero;
+use App\Actuador;
+use App\Invernadero;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
